@@ -387,6 +387,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
+# Subsystem state notifier
+MITHORIUM_PRODUCT_PACKAGES += \
+    subsystem_state_notifier
+
 # Telephony
 PRODUCT_PACKAGES += \
     ims-ext-common \
