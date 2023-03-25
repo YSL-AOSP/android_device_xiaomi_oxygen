@@ -262,6 +262,7 @@ persist.vendor.audio.calfile6=/vendor/etc/acdbdata/Tutu/Tutu_Speaker_cal.acdb
 vendor.audio.mixer_xml.path=/vendor/etc/mixer_paths_mtp.xml
 
 # Xiaomi oxygen - Bluetooth
+persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 bluetooth.le.disable_apcf_extended_features=1
 bluetooth.sco.disable_enhanced_connection=1
 
