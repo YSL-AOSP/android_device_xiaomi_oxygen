@@ -37,6 +37,10 @@ while [ "${#}" -gt 0 ]; do
     shift
 done
 
+if [ -z "${DEVICE_PARENT}" ]; then
+    DEVICE_PARENT="."
+fi
+
 if [ "${KERNEL_4_19}" == "true" ]; then
     DEVICE_COMMON="mithorium-common-4.19"
 fi
@@ -54,11 +58,13 @@ if [ -z "$ONLY_TARGET" ]; then
         write_makefiles "${MY_DIR}/proprietary-files/4.9/qcom-system.txt" true
         write_makefiles "${MY_DIR}/proprietary-files/4.9/qcom-vendor.txt" true
         write_makefiles "${MY_DIR}/proprietary-files/4.9/qcom-vendor-32.txt" true
+        write_makefiles "${MY_DIR}/proprietary-files/4.9/qcom-vendor-multilib-module.txt" true
     else
         # Kernel 4.19
         write_makefiles "${MY_DIR}/proprietary-files/4.19/qcom-system.txt" true
         write_makefiles "${MY_DIR}/proprietary-files/4.19/qcom-vendor.txt" true
         write_makefiles "${MY_DIR}/proprietary-files/4.19/qcom-vendor-32.txt" true
+        write_makefiles "${MY_DIR}/proprietary-files/4.19/qcom-vendor-multilib-module.txt" true
     fi
 
     # Finish
@@ -66,7 +72,7 @@ if [ -z "$ONLY_TARGET" ]; then
 fi
 
 if [ -z "$ONLY_COMMON" ]; then
-    if [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
+    if [ -s "${MY_DIR}/../${DEVICE_PARENT}/${DEVICE}/proprietary-files.txt" ]; then
         # Reinitialize the helper for device
         setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false
 
@@ -74,7 +80,9 @@ if [ -z "$ONLY_COMMON" ]; then
         write_headers
 
         # The standard device blobs
-        write_makefiles "${MY_DIR}/../${DEVICE}/proprietary-files.txt" true
+        for proprietary_files_txt in ${MY_DIR}/../${DEVICE_PARENT}/${DEVICE}/proprietary-files*.txt; do
+            write_makefiles "$proprietary_files_txt" true
+        done
 
         # Finish
         write_footers
@@ -92,7 +100,9 @@ if [ -z "$ONLY_COMMON" ]; then
         write_headers "$DEVICE_SPECIFIED_COMMON_DEVICE"
 
         # The standard device blobs
-        write_makefiles "${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/proprietary-files.txt" true
+        for proprietary_files_txt in ${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/proprietary-files*.txt; do
+            write_makefiles "$proprietary_files_txt" true
+        done
 
         # Finish
         write_footers

@@ -52,9 +52,23 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "init.uclamp.rc",
+    src: "etc/init.uclamp.rc",
+    sub_dir: "init",
+    vendor: true,
+}
+
+prebuilt_etc {
     name: "init.xiaomi.rc",
     src: "etc/init.xiaomi.rc",
     sub_dir: "init/hw",
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "ueventd.qcom.rc",
+    filename: "ueventd.rc",
+    src: "etc/ueventd.qcom.rc",
     vendor: true,
 }
 
@@ -83,6 +97,12 @@ sh_binary {
 sh_binary {
     name: "init.class_main.sh",
     src: "bin/init.class_main.sh",
+    vendor: true,
+}
+
+sh_binary {
+    name: "init.dump_early_dmesg.sh",
+    src: "bin/init.dump_early_dmesg.sh",
     vendor: true,
 }
 

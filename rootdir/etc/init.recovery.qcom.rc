@@ -58,3 +58,9 @@ on property:sys.usb.ffs.ready=1
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+# Charger
+service hvdcp_opti /system/bin/hvdcp_opti
+    user root
+    group system wakelock
+    seclabel u:r:hvdcp:s0

@@ -67,6 +67,10 @@ if [ -z "${SRC}" ]; then
     SRC="adb"
 fi
 
+if [ -z "${DEVICE_PARENT}" ]; then
+    DEVICE_PARENT="."
+fi
+
 if [ "${KERNEL_4_19}" == "true" ]; then
     DEVICE_COMMON="mithorium-common-4.19"
 fi
@@ -94,20 +98,24 @@ if [ -z "${ONLY_TARGET}" ]; then
         extract "${MY_DIR}/proprietary-files/4.9/qcom-system.txt" "${SRC}" "${KANG}" --section "${SECTION}"
         extract "${MY_DIR}/proprietary-files/4.9/qcom-vendor.txt" "${SRC}" "${KANG}" --section "${SECTION}"
         extract "${MY_DIR}/proprietary-files/4.9/qcom-vendor-32.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+        extract "${MY_DIR}/proprietary-files/4.9/qcom-vendor-multilib-module.txt" "${SRC}" "${KANG}" --section "${SECTION}"
     else
         # Kernel 4.19
         extract "${MY_DIR}/proprietary-files/4.19/qcom-system.txt" "${SRC}" "${KANG}" --section "${SECTION}"
         extract "${MY_DIR}/proprietary-files/4.19/qcom-vendor.txt" "${SRC}" "${KANG}" --section "${SECTION}"
         extract "${MY_DIR}/proprietary-files/4.19/qcom-vendor-32.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+        extract "${MY_DIR}/proprietary-files/4.19/qcom-vendor-multilib-module.txt" "${SRC}" "${KANG}" --section "${SECTION}"
     fi
 fi
 
-if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE}/proprietary-files.txt" ]; then
+if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE_PARENT}/${DEVICE}/proprietary-files.txt" ]; then
     # Reinitialize the helper for device
-    source "${MY_DIR}/../${DEVICE}/extract-files.sh"
+    source "${MY_DIR}/../${DEVICE_PARENT}/${DEVICE}/extract-files.sh"
     setup_vendor "${DEVICE}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
 
-    extract "${MY_DIR}/../${DEVICE}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+    for proprietary_files_txt in ${MY_DIR}/../${DEVICE_PARENT}/${DEVICE}/proprietary-files*.txt; do
+        extract "$proprietary_files_txt" "${SRC}" "${KANG}" --section "${SECTION}"
+    done
 fi
 
 if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/proprietary-files.txt" ]; then
@@ -115,7 +123,9 @@ if [ -z "${ONLY_COMMON}" ] && [ -s "${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/prop
     source "${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/extract-files.sh"
     setup_vendor "${DEVICE_SPECIFIED_COMMON}" "${VENDOR}" "${ANDROID_ROOT}" false "${CLEAN_VENDOR}"
 
-    extract "${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/proprietary-files.txt" "${SRC}" "${KANG}" --section "${SECTION}"
+    for proprietary_files_txt in ${MY_DIR}/../${DEVICE_SPECIFIED_COMMON}/proprietary-files*.txt; do
+        extract "$proprietary_files_txt" "${SRC}" "${KANG}" --section "${SECTION}"
+    done
 fi
 
 "${MY_DIR}/setup-makefiles.sh" ${SETUP_MAKEFILES_ARGS}

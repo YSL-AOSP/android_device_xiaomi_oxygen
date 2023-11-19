@@ -45,8 +45,8 @@
         <transport>hwbinder</transport>
         <fqname>@1.2::ISap/slot1</fqname>
         <fqname>@1.2::ISap/slot2</fqname>
-        <fqname>@1.4::IRadio/slot1</fqname>
-        <fqname>@1.4::IRadio/slot2</fqname>
+        <fqname>@1.5::IRadio/slot1</fqname>
+        <fqname>@1.5::IRadio/slot2</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.sensors</name>
@@ -117,6 +117,11 @@
         <name>vendor.qti.hardware.btconfigstore</name>
         <transport>hwbinder</transport>
         <fqname>@2.0::IBTConfigStore/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.qti.hardware.cacert</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IService/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.capabilityconfigstore</name>

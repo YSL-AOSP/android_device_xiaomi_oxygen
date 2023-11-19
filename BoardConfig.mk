@@ -113,6 +113,7 @@ AUDIO_FEATURE_ENABLED_DYNAMIC_LOG := false
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 AUDIO_FEATURE_ENABLED_SVA_MULTI_STAGE := true
 AUDIO_FEATURE_ENABLED_DLKM := false
+AUDIO_FEATURE_ENABLED_HAL_V7 := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8953
@@ -150,6 +151,9 @@ TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 # GRF/VF
 BOARD_SHIPPING_API_LEVEL := 30
 
+# Health
+TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/power_supply/battery/battery_charging_enabled
+
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(COMMON_PATH)/framework_compatibility_matrix.xml \
@@ -174,6 +178,9 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/dsp:/dsp \
     /vendor/firmware_mnt:/firmware \
     /mnt/vendor/persist:/persist
+
+# Camera
+TARGET_SUPPORT_HAL1 := false
 
 # Power
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/platform/soc/78b7000.i2c/i2c-3/3-0038/wakeup_mode"
