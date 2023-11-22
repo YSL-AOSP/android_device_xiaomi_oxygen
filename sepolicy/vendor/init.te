@@ -11,3 +11,10 @@ allow init sysfs_leds:lnk_file r_file_perms;
 
 # Prop
 get_prop(init, vendor_subsys_state_notifier_prop)
+<<<<<<< HEAD
+=======
+get_prop(init, vendor_xiaomi_prop)
+
+# SDHCI
+allow init sysfs_kernel_sdhci_msm:file w_file_perms;
+>>>>>>> 4df51c1... mithorium-common: Notify MSM SDHCI driver to add host

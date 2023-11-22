@@ -24,7 +24,11 @@ allow vendor_init {
 allow vendor_init {
   proc_dirty
   proc_dirty_ratio
+<<<<<<< HEAD
   proc_sched
+=======
+  sysfs_kernel_sdhci_msm
+>>>>>>> 4df51c1... mithorium-common: Notify MSM SDHCI driver to add host
 }:file w_file_perms;
 
 # Prop
