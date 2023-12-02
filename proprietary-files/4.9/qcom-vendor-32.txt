@@ -1,4 +1,5 @@
 # All unpinned blobs below are extracted from LA.UM.9.6.3.r1-06200-89xx.0 (4.9)
+# PAN Package version: Nokia/Panther_00WW/PAN_sprout:11/RKQ1.200928.002/00WW_3_240:user/release-keys
 # riva Package version: Xiaomi/riva/riva:8.1.0/OPM1.171019.026/V11.0.2.0.OCKMIXM:user/release-keys
 
 # ADSP
@@ -68,7 +69,7 @@ vendor/lib/libgsl.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
 
-# Media
+# Media - from PAN
 vendor/lib/libAlacSwDec.so
 vendor/lib/libApeSwDec.so
 vendor/lib/libMpeg4SwEncoder.so
