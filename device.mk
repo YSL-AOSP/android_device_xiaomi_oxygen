@@ -1,3 +1,4 @@
+#
 # Copyright (C) 2017-2022 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
@@ -161,6 +162,10 @@ MITHORIUM_PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     android.hardware.ir@1.0-service
+
+# Device-specific Settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
 
 # Display
 PRODUCT_PACKAGES += \
